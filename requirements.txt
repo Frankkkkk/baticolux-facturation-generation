@@ -1,0 +1,9 @@
+Jinja2==2.10
+MarkupSafe==1.0
+numpy==1.14.3
+pandas==0.22.0
+pdfkit==0.6.1
+python-dateutil==2.7.3
+pytz==2018.4
+PyYAML==3.12
+six==1.11.0

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>Facture {{start_invoice_date.strftime('%Y-%m-%d')}} - {{ contract_address }}</title>
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link href="https://fonts.googleapis.com/css?family=Tajawal:400,700" rel="stylesheet"> 
+
+		<link rel="stylesheet" href="files/template.css">
+		<link rel="stylesheet" href="files/template.css" media="print">
+	</head>
+	<body>
+		<div id="container">
+
+			<div class="invoice-top">
+				<section id="memo">
+					<div class="logo">
+						<img/>
+					</div>
+				</section>
+			</div>
+
+
+			<div>
+				<div class="invoice-details">
+					<section id="client-info">
+						<p>
+							<span>{{ sending_address | replace("\n", "<br>") }}</span>
+						</p>
+					</section>
+					<div class="clearfix"></div><br>
+					<div style="color: #cccccc;">
+						Invoices: {{ invoice_prefix }}
+					</div>
+				</div>
+			</div>
+
+
+
+		</div>
+
+
+
+
+	</body></html>

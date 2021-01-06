@@ -1,0 +1,304 @@
+/*! Invoice Templates @author: Invoicebus @email: info@invoicebus.com @web: https://invoicebus.com @version: 1.0.0 @updated: 2015-06-15 15:06:01 @license: Invoicebus */
+/* Reset styles */
+/*
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700,800&subset=cyrillic,cyrillic-ext,latin,greek-ext,greek,latin-ext,vietnamese");
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
+@page {
+	size: A4;
+}
+
+html {
+	line-height: 0.9;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+/*
+table {
+  table-layout: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+*/
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* Invoice styles */
+
+/** 
+ * IMPORTANT NOTICE: DON'T USE '!important' otherwise this may lead to broken print layout.
+ * Some browsers may require '!important' in oder to work properly but be careful with it.
+ */
+.clearfix {
+  display: block;
+  clear: both;
+}
+
+.hidden {
+  display: none;
+}
+
+b, strong, .bold {
+  font-weight: bold;
+}
+
+#container {
+	font-family: 'Tajawal', sans-serif;
+	margin: 50px; /*0 auto;*/
+
+	min-height: 1158px;
+	color: black;
+}
+
+.invoice-top {
+  /*
+  min-height: 50px;
+  border-bottom: 2px solid #4A511D;
+  */
+  /*
+  background: url("entete_2_crop.png") no-repeat;
+  background-size: cover;
+  */
+  padding: 40px;
+  color: #686868;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.invoice-body {
+	/*
+  position: relative;
+  background: #F3E8E0 url("invoice.png") 15px 40px no-repeat;
+  background-size: auto 890px;
+  */
+}
+.invoice-body .invoice-details {
+  float: right;
+  background: white;
+
+  /*
+  width: 560px;
+  min-height: 895px;
+  */
+  padding: 30px 30px;
+}
+
+#memo .logo {
+  float: left;
+  margin-right: 20px;
+}
+#memo .logo img {
+  height: 100px;
+}
+#memo:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.left-info {
+  float: left;
+}
+
+#invoice-info {
+  	margin-top: 20px;
+  	display: block;
+}
+#invoice-info div {
+  	margin-bottom: 1px;
+}
+#invoice-info div span:first-child {
+  	color: black;
+}
+
+#client-info {
+  float: right;
+  font-size: 17px;
+  /*
+  margin-top: 20px;
+  */
+  min-width: 220px;
+  padding-right: 30px;
+  vertical-align: center;
+}
+#client-info span{
+	line-height: 1.2;
+}
+
+#invoice-title-number {
+  font-size: 18px;
+  margin-top: 20px;
+  margin-right: 270px;
+  border: 1px solid;
+  border-color: black;
+  padding: 5px;
+}
+
+
+#invoice_date {
+  float: right;
+  font-size: 17px;
+  margin-top: 20px;
+  min-width: 220px;
+  padding-right: 30px;
+}
+#invoice_date > div {
+  margin-bottom: 1px;
+  min-width: 20px;
+}
+
+
+#items {
+  margin-top: 70px;
+}
+
+
+#terms {
+  margin: 70px 0 10px 0;
+  page-break-inside: avoid;
+  color: #808080;
+}
+
+.payment-info {
+  text-align: center;
+  color: #75a675;
+
+}
+.on_bottom {
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+.payment-info div {
+  display: inline-block;
+  min-width: 20px;
+}
+
+.ib_drop_zone {
+  border-color: white !important;
+  color: white !important;
+}
+
+[data-row-number] {
+  display: none !important;
+}
+
+.greyish {
+	color: #9a9a9a;
+}
+
+.align_right {
+	text-align: right;
+}
+.align_left {
+	text-align: left;
+}
+
+#table_config {
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px solid #c9f2c6;
+}
+
+#table_config th {
+	vertical-align: middle;
+	font-weight: bold;
+	color: #808080;
+	border: 1px solid #c9f2c6;
+	background-color: rgb(239, 244, 239) !important;
+	height: 40px;
+}
+
+#table_config td {
+	border-right: 1px solid #c9f2c6;
+	padding: 5px;
+}
+
+
+
+.ti td, .til td {
+	border-right: 1px solid #c9f2c6;
+	border-left: 1px solid #c9f2c6;
+	padding: 5px;
+}
+.til td {
+	/*
+	border-right: 1px solid #c9f2c6;
+	border-left: 1px solid #c9f2c6;
+	*/
+	border-bottom: 1px solid #c9f2c6;
+}
+.tis {
+	border: 1px solid #c9f2c6;
+	padding: 5px;
+}
+
+#table_items {
+	width: 100%;
+	border-collapse: collapse;
+	vertical-align: middle;
+/*	border: 1px solid rgb(190, 216, 190);*/
+}
+
+#table_items th {
+	vertical-align: middle;
+	font-weight: bold;
+	color: #808080;
+	border: 1px solid #c9f2c6;
+	background-color: rgb(239, 244, 239) !important;
+	height: 40px;
+	padding-left: 5px;
+}
+
+#table_items td {
+	vertical-align: middle;
+}
+
+/**
+ * If the printed invoice is not looking as expected you may tune up
+ * the print styles (you can use !important to override styles)
+ */
+@media print {
+	body {
+	-webkit-print-color-adjust: exact;
+	}
+}

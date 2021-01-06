@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>Facture {{start_invoice_date.strftime('%Y-%m-%d')}} - {{ contract_address }}</title>
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link href="https://fonts.googleapis.com/css?family=Tajawal:400,700" rel="stylesheet"> 
+
+		<link rel="stylesheet" href="files/template.css">
+		<link rel="stylesheet" href="files/template.css" media="print">
+	</head>
+	<body>
+		<div id="container">
+
+			<div class="invoice-top">
+				<section id="memo">
+					<div class="logo">
+						<img src="files/logo.png">
+						<!--
+						<br>
+						Energy Solutions Provider for Real Estate
+						-->
+					</div>
+				</section>
+			</div>
+
+
+			<div>
+				<div class="invoice-details">
+					<section id="client-info">
+						<p>
+						<span class="bold">{{ name | replace("\n", "<br>") }}</span>
+							<br>
+							<span>{{ address | replace("\n", "<br>") }}</span>
+						</p>
+					</section>
+
+					<div class="clearfix"></div><br>
+					<div class="clearfix"></div>
+					<div id="invoice-title-number">
+							<span>Facture N° {{ invoice_number }}</span>
+					</div>
+					<br>
+					<section id="invoice_date">
+						<div>
+							Genève, le {{creation_date}}
+						</div>
+					</section>
+					<div class="clearfix"></div>
+					<br>
+					<p></p>
+
+					<div class="left-info">
+						<section id="invoice-info">
+							<div>
+								<span>N/ref:</span>
+								<span>Nicolas Gaspoz</span>
+							</div>
+							<div>
+								<span>V/ref:</span>
+								<span>{{ your_ref }}</span>
+							</div>
+						</section>
+					</div>
+					<br>
+
+
+					<section id="items">
+						<p>
+						<b>Concerne: Fourniture électricité - {{ contract_address }}</b><br>
+						</p>
+						<br>
+						<br>
+
+						<table id="table_config">
+							<tr>
+								<th>Vendeur</th>
+								<th>Tâche</th>
+								<th>Modalités de paiement</th>
+								<th>Échéance</th>
+							</tr>
+							<tr>
+								<td>NG</td>
+								<td>Approvisionnement électrique du site
+									{% if energy_quality != "" %}
+									 - {{energy_quality}}
+									{% endif %}
+								</td>
+								<td>Paiement à la réception</td>
+								<td>30 jours</td>
+							</tr>
+						</table>
+						<br><br>
+
+
+						<!--
+						. Qualité énergétique: {{ energy_quality }}
+						-->
+
+						<table id="table_items">
+							<tr>
+								<th class="align_left"> Point de Mesure</th>
+								<th>Quantité<br>[kWh]</th>
+								<th>Prix unitaire<br>[cts/kWh]</th>
+								<th>Montant HT</th>
+							</tr>
+
+							{% for meter in meters %}
+							<tr class="ti">
+								<!--
+								<td>{{ meter['MPAN'] }}<br><span class="greyish">({{ meter['name'] }})</span></td>
+								<td>{{ meter['volume'] | round }}</td>
+								<td>{{ meter['price_kWh'] }}</td>
+								<td>{{ meter['price_volume'] | round(1) }}</td>
+								-->
+								<td>{{meter['MPAN']}} &nbsp; &nbsp; <i>{{ meter['name'] }}</i></td>
+								<td class="align_right">{{meter['volume'] | round(0) | int | spaceize}}</td>
+								<td class="align_right">{{meter['price_kWh'] }}</td>
+								<td class="align_right">{{meter['price_volume'] | round(1) | spaceize}}0</td>
+							</tr>
+							{% endfor %}
+							<tr class="ti">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+
+							<tr class="ti">
+								<td><b>Électricité consommée (total):</b></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr class="ti">
+								<td>Période du: {{start_invoice_date.strftime('%Y-%m-%d')}} au {{end_invoice_date.strftime('%Y-%m-%d')}}</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr class="ti">
+								<td>Quantité d'énergie relevée:</td>
+								<td class="align_right">{{total_volume | round(0) | int | spaceize }}</td>
+								<td class="align_right"></td>
+								<td class="align_right">{{total_price | round(1) | spaceize}}0</td>
+							</tr>
+							<tr class="til">
+								<td>&nbsp;</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td class="align_right">S-Total CHF HT&nbsp;</td>
+								<td class="tis align_right">{{ total_price | round(1) | spaceize }}0</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td class="align_right">TVA {{ tax_rate }} %&nbsp;</td>
+								<td class="tis align_right">{{ tax_price | round(1) | spaceize }}0</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td class="align_right">Total TTC&nbsp;</td>
+								<td class="tis align_right"><b>{{ total_price_w_tax | round(1) | spaceize }}0</b></td>
+							</tr>
+						</table>
+
+					</section>
+
+					<div class="clearfix"></div>
+
+
+					<section id="terms">
+						Nous vous remercions de bien vouloir effectuer votre paiement sur le compte suivant:<br><br>
+
+						Numéro de compte: 946 789.01Z &nbsp;&nbsp;&nbsp;
+						IBAN: CH46 0024 0240 9467 8901 Z &nbsp;&nbsp;&nbsp;
+						BIC: UBSWCHZH80A
+
+					</section>
+					<br><br>
+
+					<div class="payment-info">
+						Energimmo Services SA — Rue Eugène-Marziano, 17a — 1227 Les Acacias— CHE-186.902.055 TVA<br>
+						+41 22 552 04 29 — info@energimmo.ch — www.energimmo.ch
+					</div>
+
+				<div class="clearfix"></div>
+			</div>
+
+		</div>
+
+
+
+
+	</body></html>
